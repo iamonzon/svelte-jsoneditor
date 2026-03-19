@@ -14,9 +14,9 @@
   <title>Diff: {data.fromShort} → {data.toShort}</title>
 </svelte:head>
 
-<h1>{data.fromShort} &rarr; {data.toShort}</h1>
+<h1>{data.fromShort} &larr; {data.toShort}</h1>
 
-<p>Comparing <code>{data.fromSha}</code> &rarr; <code>{data.toSha}</code></p>
+<p>Comparing <code>{data.fromSha}</code> &larr; <code>{data.toSha}</code></p>
 
 <div class="file-tabs">
   {#each data.files as file, i}

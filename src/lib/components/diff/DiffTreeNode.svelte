@@ -103,7 +103,22 @@
   style:--level={level}
   data-path={path}
 >
-  {#if isExpandable}
+  {#if isExpandable && childCount === 0}
+    <!-- Empty placeholder (alignment spacer for pruned diffs) -->
+    <div class="node-placeholder" style:--level={level}>
+      {#if keyName !== null}
+        <span class="node-key">
+          {#if typeof keyName === 'number'}
+            <span class="node-index">{keyName}</span>
+          {:else}
+            <span class="node-prop">{keyName}</span>
+          {/if}
+          <span class="node-separator">:</span>
+        </span>
+      {/if}
+      <span class="node-meta-placeholder">—</span>
+    </div>
+  {:else if isExpandable}
     <!-- Object or Array node -->
     <div class="node-header" role="button" tabindex="0" onclick={handleToggle} onkeydown={(e) => e.key === 'Enter' && handleToggle(e)}>
       <button type="button" class="node-expand" onclick={handleToggle} aria-label={expanded ? 'Collapse' : 'Expand'}>
@@ -204,6 +219,19 @@
     font-family: 'SF Mono', 'Consolas', 'Monaco', 'Menlo', monospace;
     font-size: 13px;
     line-height: 22px;
+  }
+
+  .node-placeholder {
+    display: flex;
+    align-items: center;
+    padding-left: calc(var(--level, 0) * 18px + 20px);
+    min-height: 22px;
+    opacity: 0.3;
+  }
+
+  .node-meta-placeholder {
+    color: var(--jse-delimiter-color, rgba(0, 0, 0, 0.38));
+    font-style: italic;
   }
 
   .node-header {

@@ -229,8 +229,8 @@ describe('diff', () => {
       }
       const [pb, ph] = pruneToChanges(base, head)
 
-      // Only id:2 (modified) and id:4 (added) should appear
-      assert.deepStrictEqual(pb, { items: [{ id: 2, name: 'shield' }] })
+      // Only id:2 (modified) and id:4 (added) — aligned with {} placeholders
+      assert.deepStrictEqual(pb, { items: [{ id: 2, name: 'shield' }, {}] })
       assert.deepStrictEqual(ph, {
         items: [
           { id: 2, name: 'armor' },

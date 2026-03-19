@@ -16,7 +16,7 @@
 
 <h1>PR #{data.prNumber} — {data.prTitle}</h1>
 
-<p>Comparing {data.baseRef} &rarr; {data.headRef}</p>
+<p>Comparing {data.baseRef} &larr; {data.headRef}</p>
 
 <div class="file-tabs">
   {#each data.files as file, i}
