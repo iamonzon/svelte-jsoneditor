@@ -14,9 +14,9 @@
   <title>Diff: {data.fromBranch} → {data.toBranch}</title>
 </svelte:head>
 
-<h1>{data.fromBranch} &rarr; {data.toBranch}</h1>
+<h1>{data.fromBranch} &larr; {data.toBranch}</h1>
 
-<p>Comparing {data.baseRef} &rarr; {data.headRef}</p>
+<p>Comparing {data.baseRef} &larr; {data.headRef}</p>
 
 <div class="file-tabs">
   {#each data.files as file, i}

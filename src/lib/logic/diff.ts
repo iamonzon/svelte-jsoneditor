@@ -71,14 +71,11 @@ function pruneIdArray(
   for (const id of allIds) {
     const bv = baseIdx.get(id)
     const hv = headIdx.get(id)
-    if (!bv) {
-      prunedHead.push(hv!)
-    } else if (!hv) {
-      prunedBase.push(bv)
-    } else if (!deepEqual(bv, hv)) {
-      prunedBase.push(bv)
-      prunedHead.push(hv)
-    }
+    if (bv && hv && deepEqual(bv, hv)) continue
+
+    // Always push to both arrays to keep them aligned
+    prunedBase.push(bv ?? {})
+    prunedHead.push(hv ?? {})
   }
 
   return [prunedBase, prunedHead]
