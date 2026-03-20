@@ -53,9 +53,10 @@ export const load: PageServerLoad = async ({ params }) => {
     exec(`git fetch origin "refs/pull/${prNumber}/head" --quiet`, { cwd: repoDir })
   } catch { /* ignore */ }
 
-  // Use immutable commit SHAs instead of branch names —
-  // branch names point to wrong content after a PR is merged
-  const baseRef = prInfo.baseRefOid
+  // Use the merge-base as the left side (same as GitHub's three-dot diff).
+  // This shows only changes introduced by the PR, not unrelated base branch commits.
+  const mergeBase = exec(`git merge-base "${prInfo.baseRefOid}" "${prInfo.headRefOid}"`, { cwd: repoDir })
+  const baseRef = mergeBase
   const headRef = prInfo.headRefOid
 
   // Process ALL changed files — smart parse determines if they're JSON-parseable
